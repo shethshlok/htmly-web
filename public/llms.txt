@@ -1,0 +1,30 @@
+# Htmly
+
+> Htmly is a hosted MCP (Model Context Protocol) server that lets AI agents render real web pages instead of replying with plain markdown text. An agent writes HTML/CSS/JS, pushes it through a single tool, and instantly receives a live, hosted preview URL — so the user can see the result in a visual way, not just read about it. No install, no local process, just a URL.
+
+Htmly is built on the Model Context Protocol and connects over SSE (Server-Sent Events). It exposes one tool, `render_files`, which accepts a bundle of files (e.g. `index.html`, `styles.css`, `app.js`), writes them to an isolated, cryptographically unique workspace, hosts them, and returns a live link. Workspaces are automatically cleaned up after 7 days.
+
+## Connecting
+
+- SSE endpoint: `https://html.shloksheth.tech/sse`
+- Tool exposed: `render_files` (params: `files[]` of `{ name, content }`, optional `entryPoint`, defaults to `index.html`)
+- Transport: SSE (works with any MCP-compatible client)
+
+## How to add the server
+
+- [Claude Desktop](https://htmly.shloksheth.tech/#install): add to `claude_desktop_config.json` under `mcpServers` → `htmly` → `url: https://html.shloksheth.tech/sse`, then restart.
+- [Claude Code](https://htmly.shloksheth.tech/#install): run `claude mcp add --transport sse htmly https://html.shloksheth.tech/sse`
+- [Cursor](https://htmly.shloksheth.tech/#install): add the same `mcpServers` block to `.cursor/mcp.json`.
+- [VS Code (Copilot Agent)](https://htmly.shloksheth.tech/#install): add to `.vscode/mcp.json` under `servers` with `type: "sse"` and the URL.
+- [Any MCP client](https://htmly.shloksheth.tech/#install): point the SSE transport at `https://html.shloksheth.tech/sse`.
+
+## Links
+
+- [Landing page](https://htmly.shloksheth.tech): overview, install instructions, and FAQ.
+- [Live server](https://html.shloksheth.tech): the running Htmly engine and hosted previews.
+- [Author](https://github.com/shethshlok): Shlok Sheth on GitHub.
+
+## Notes
+
+- Htmly is free to use and remote-first; nothing runs on the user's machine.
+- It can also be self-hosted (built with Bun, ships with a Dockerfile); set `BASE_URL` to a custom domain.

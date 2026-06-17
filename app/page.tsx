@@ -1,13 +1,45 @@
+import { Hero } from "@/components/Hero";
 import { InstallTabs } from "@/components/InstallTabs";
 import { Faq } from "@/components/Faq";
 import { CopyButton } from "@/components/CodeBlock";
 import { ICONS } from "@/components/icons";
-import { FEATURES, STEPS, SSE_URL } from "@/lib/configs";
+import { FEATURES, STEPS, SSE_URL, FAQS } from "@/lib/configs";
+
+const SITE_URL = "https://htmly.shloksheth.tech";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      name: "Htmly",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Any (MCP client)",
+      description:
+        "An MCP server that lets Claude and other AI agents push HTML/CSS/JS and get an instant, live preview link.",
+      url: SITE_URL,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      author: { "@type": "Person", name: "Shlok Sheth" },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: FAQS.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
 
 export default function Home() {
   return (
-    <main className="relative overflow-x-hidden">
-      {/* ---------- Nav ---------- */}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {/* ---------- Nav (sticky — kept outside the overflow wrapper so it stays pinned) ---------- */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-bg/80 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight">
@@ -30,77 +62,9 @@ export default function Home() {
         </nav>
       </header>
 
+      <main className="relative overflow-x-hidden">
       {/* ---------- Hero ---------- */}
-      <section id="top" className="relative">
-        <div className="glow pointer-events-none absolute inset-0 -z-10" />
-        <div className="grid-bg pointer-events-none absolute inset-0 -z-10 h-[600px]" />
-        <div className="mx-auto max-w-6xl px-6 pt-20 pb-16 text-center md:pt-28">
-          <a
-            href="https://modelcontextprotocol.io"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs text-muted transition hover:border-brand hover:text-ink"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-2" />
-            An MCP server for AI agents
-          </a>
-
-          <h1 className="mx-auto mt-7 max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            Let your AI render real web pages,{" "}
-            <span className="bg-gradient-to-r from-brand to-brand-2 bg-clip-text text-transparent">
-              not just describe them
-            </span>
-          </h1>
-
-          <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted md:text-lg">
-            Htmly is a hosted MCP server. Your AI writes HTML/CSS/JS, pushes it
-            through one tool, and instantly gets back a live preview link — no
-            install, no local server, just a URL.
-          </p>
-
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href="#install"
-              className="w-full rounded-full bg-gradient-to-r from-brand to-brand-2 px-7 py-3.5 text-sm font-semibold text-[#07070b] transition hover:opacity-90 sm:w-auto"
-            >
-              Add Htmly in 1 minute →
-            </a>
-            <a
-              href="#how"
-              className="w-full rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-ink transition hover:border-brand sm:w-auto"
-            >
-              See how it works
-            </a>
-          </div>
-
-          {/* Hero visual: a connect snippet */}
-          <div className="mx-auto mt-14 max-w-2xl text-left">
-            <div className="overflow-hidden rounded-2xl border border-border bg-bg-soft shadow-2xl shadow-brand/5">
-              <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-                <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-                <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-                <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-                <span className="ml-3 font-mono text-xs text-muted">
-                  claude_desktop_config.json
-                </span>
-              </div>
-              <pre className="overflow-x-auto px-5 py-5 font-mono text-sm leading-relaxed text-ink">
-{`{
-  "mcpServers": {
-    "htmly": {
-      "url": "`}<span className="text-brand-2">{SSE_URL}</span>{`"
-    }
-  }
-}`}
-              </pre>
-              <div className="flex items-center justify-between border-t border-border px-4 py-3">
-                <span className="font-mono text-xs text-muted">Tool exposed: render_files</span>
-                <CopyButton text={SSE_URL} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       {/* ---------- Social proof / trust bar ---------- */}
       <section className="border-y border-border bg-bg-soft/40">
@@ -118,11 +82,11 @@ export default function Home() {
           In simple words
         </h2>
         <p className="mt-5 text-2xl font-medium leading-snug tracking-tight md:text-3xl">
-          AI is great at writing code, but it can&apos;t <em className="not-italic text-muted">show</em> you
-          the result. Htmly is the missing screen — it takes the web page your
-          assistant just wrote and{" "}
-          <span className="text-brand-2">puts it online instantly</span> so you can
-          click and look.
+          Normally your AI replies with a block of markdown you have to read and
+          imagine. Htmly turns that answer into a{" "}
+          <span className="text-brand-2">real, rendered web page</span> and deploys
+          it in an instant — so you can <em className="not-italic text-muted">see</em>{" "}
+          what it built, in a far more visual way, not just read about it.
         </p>
       </section>
 
@@ -235,6 +199,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }
