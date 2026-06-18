@@ -1,4 +1,5 @@
-export const SSE_URL = "https://html.shloksheth.tech/sse";
+export const MCP_URL = "https://html.shloksheth.tech/mcp";
+export const LEGACY_SSE_URL = "https://html.shloksheth.tech/sse";
 
 export type InstallMethod = {
   id: string;
@@ -21,7 +22,7 @@ export const INSTALL_METHODS: InstallMethod[] = [
     code: `{
   "mcpServers": {
     "htmly": {
-      "url": "${SSE_URL}"
+      "url": "${MCP_URL}"
     }
   }
 }`,
@@ -32,7 +33,7 @@ export const INSTALL_METHODS: InstallMethod[] = [
     blurb: "Add the server from your terminal with a single command.",
     location: "terminal",
     language: "bash",
-    code: `claude mcp add --transport sse htmly ${SSE_URL}`,
+    code: `claude mcp add --transport http htmly ${MCP_URL}`,
   },
   {
     id: "cursor",
@@ -44,7 +45,7 @@ export const INSTALL_METHODS: InstallMethod[] = [
     code: `{
   "mcpServers": {
     "htmly": {
-      "url": "${SSE_URL}"
+      "url": "${MCP_URL}"
     }
   }
 }`,
@@ -59,8 +60,8 @@ export const INSTALL_METHODS: InstallMethod[] = [
     code: `{
   "servers": {
     "htmly": {
-      "type": "sse",
-      "url": "${SSE_URL}"
+      "type": "http",
+      "url": "${MCP_URL}"
     }
   }
 }`,
@@ -69,17 +70,17 @@ export const INSTALL_METHODS: InstallMethod[] = [
     id: "generic",
     label: "Any MCP client",
     blurb:
-      "Htmly speaks the Model Context Protocol over SSE. Point any compatible client's SSE transport at the endpoint below.",
-    location: "SSE endpoint",
+      "Htmly speaks the Model Context Protocol over Streamable HTTP. Use the endpoint below, or the legacy SSE endpoint if your client requires SSE.",
+    location: "MCP endpoint",
     language: "bash",
-    code: SSE_URL,
+    code: MCP_URL,
   },
 ];
 
 export const FEATURES = [
   {
     title: "Push-to-visualize",
-    body: "Your agent sends a bundle of HTML/CSS/JS through one tool — render_files — and gets back a live URL instantly.",
+    body: "Your agent sends a bundle of HTML/CSS/JS through one tool - htmly - and gets back a live URL instantly.",
     icon: "bolt",
   },
   {
@@ -94,7 +95,7 @@ export const FEATURES = [
   },
   {
     title: "Zero install, remote-first",
-    body: "Built on Server-Sent Events. No package to download, no local process — just point your client at the URL.",
+    body: "Built on remote MCP transport. No package to download, no local process - just point your client at the URL.",
     icon: "cloud",
   },
 ];
@@ -103,7 +104,7 @@ export const STEPS = [
   {
     n: "01",
     title: "Connect Htmly",
-    body: "Add the SSE endpoint to your AI client using any of the methods above. Takes about a minute.",
+    body: "Add the MCP endpoint to your AI client using any of the methods above. Takes about a minute.",
   },
   {
     n: "02",
@@ -120,7 +121,7 @@ export const STEPS = [
 export const FAQS = [
   {
     q: "What exactly is an MCP server?",
-    a: "MCP (Model Context Protocol) is an open standard that lets AI assistants use external tools. An MCP server exposes those tools — Htmly's tool is render_files, which turns code your AI writes into a hosted web page.",
+    a: "MCP (Model Context Protocol) is an open standard that lets AI assistants use external tools. Htmly exposes one tool, htmly, which turns code your AI writes into a hosted web page.",
   },
   {
     q: "Do I need to install or run anything?",
@@ -128,11 +129,11 @@ export const FAQS = [
   },
   {
     q: "Which clients work with Htmly?",
-    a: "Any MCP-compatible client that supports SSE transport: Claude Desktop, Claude Code, Cursor, VS Code (Copilot Agent), and custom clients built on the MCP SDK.",
+    a: "Any MCP-compatible client that supports remote MCP transport: Claude Desktop, Claude Code, Cursor, VS Code (Copilot Agent), and custom clients built on the MCP SDK.",
   },
   {
     q: "How long do my previews stay online?",
-    a: "Workspaces are automatically cleaned up after 7 days, so links stay fresh and the engine stays lean.",
+    a: "Workspaces stay online for 24 hours. After that, stale links expire and the engine removes the hosted files to keep resource usage bounded.",
   },
   {
     q: "Can I self-host it?",

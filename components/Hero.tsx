@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CopyButton } from "./CodeBlock";
-import { SSE_URL } from "@/lib/configs";
+import { MCP_URL } from "@/lib/configs";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -135,7 +135,7 @@ export function Hero() {
   "mcpServers": {
     "htmly": {
       "url": "`}
-                <span className="text-brand-2">{SSE_URL}</span>
+                <span className="text-brand-2">{MCP_URL}</span>
                 {`"
     }
   }
@@ -143,9 +143,9 @@ export function Hero() {
               </pre>
               <div className="flex items-center justify-between border-t border-white/10 px-4 py-3">
                 <span className="font-mono text-xs text-cream/50">
-                  Tool exposed: render_files
+                  Tool exposed: htmly
                 </span>
-                <CopyButton text={SSE_URL} />
+                <CopyButton text={MCP_URL} />
               </div>
             </div>
           </motion.div>

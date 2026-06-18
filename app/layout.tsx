@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "render HTML AI",
     "Claude Desktop MCP",
     "Cursor MCP server",
-    "SSE MCP server",
+    "remote MCP server",
   ],
   authors: [{ name: "Shlok Sheth", url: "https://github.com/shethshlok" }],
   creator: "Shlok Sheth",

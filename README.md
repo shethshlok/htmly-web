@@ -30,4 +30,4 @@ bun run start
 ## Editing the server details
 
 All MCP install snippets and copy live in [`lib/configs.ts`](./lib/configs.ts).
-Change `SSE_URL` there to point at a different Htmly instance.
+Change `MCP_URL` there to point at a different Htmly instance.

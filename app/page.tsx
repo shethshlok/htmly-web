@@ -3,7 +3,7 @@ import { InstallTabs } from "@/components/InstallTabs";
 import { Faq } from "@/components/Faq";
 import { CopyButton } from "@/components/CodeBlock";
 import { ICONS } from "@/components/icons";
-import { FEATURES, STEPS, SSE_URL, FAQS } from "@/lib/configs";
+import { FEATURES, STEPS, MCP_URL, FAQS } from "@/lib/configs";
 
 const SITE_URL = "https://htmly.shloksheth.tech";
 
@@ -175,9 +175,9 @@ export default function Home() {
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <code className="rounded-full border border-border bg-card px-5 py-3 font-mono text-sm text-brand-2">
-              {SSE_URL}
+              {MCP_URL}
             </code>
-            <CopyButton text={SSE_URL} className="px-5 py-3 text-sm" />
+            <CopyButton text={MCP_URL} className="px-5 py-3 text-sm" />
           </div>
         </div>
       </section>

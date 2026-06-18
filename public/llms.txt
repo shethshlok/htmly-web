@@ -2,21 +2,22 @@
 
 > Htmly is a hosted MCP (Model Context Protocol) server that lets AI agents render real web pages instead of replying with plain markdown text. An agent writes HTML/CSS/JS, pushes it through a single tool, and instantly receives a live, hosted preview URL — so the user can see the result in a visual way, not just read about it. No install, no local process, just a URL.
 
-Htmly is built on the Model Context Protocol and connects over SSE (Server-Sent Events). It exposes one tool, `render_files`, which accepts a bundle of files (e.g. `index.html`, `styles.css`, `app.js`), writes them to an isolated, cryptographically unique workspace, hosts them, and returns a live link. Workspaces are automatically cleaned up after 7 days.
+Htmly is built on the Model Context Protocol and connects over remote MCP transport. It exposes one tool, `htmly`, which accepts a bundle of files (e.g. `index.html`, `styles.css`, `app.js`), writes them to an isolated, cryptographically unique workspace, hosts them, and returns a live link. Workspaces stay online for 24 hours before expiring.
 
 ## Connecting
 
-- SSE endpoint: `https://html.shloksheth.tech/sse`
-- Tool exposed: `render_files` (params: `files[]` of `{ name, content }`, optional `entryPoint`, defaults to `index.html`)
-- Transport: SSE (works with any MCP-compatible client)
+- MCP endpoint: `https://html.shloksheth.tech/mcp`
+- Legacy SSE endpoint: `https://html.shloksheth.tech/sse`
+- Tool exposed: `htmly` (params: `files[]` of `{ name, content }`, optional `entryPoint`, defaults to `index.html`)
+- Transport: Streamable HTTP, with legacy SSE support
 
 ## How to add the server
 
-- [Claude Desktop](https://htmly.shloksheth.tech/#install): add to `claude_desktop_config.json` under `mcpServers` → `htmly` → `url: https://html.shloksheth.tech/sse`, then restart.
-- [Claude Code](https://htmly.shloksheth.tech/#install): run `claude mcp add --transport sse htmly https://html.shloksheth.tech/sse`
+- [Claude Desktop](https://htmly.shloksheth.tech/#install): add to `claude_desktop_config.json` under `mcpServers` -> `htmly` -> `url: https://html.shloksheth.tech/mcp`, then restart.
+- [Claude Code](https://htmly.shloksheth.tech/#install): run `claude mcp add --transport http htmly https://html.shloksheth.tech/mcp`
 - [Cursor](https://htmly.shloksheth.tech/#install): add the same `mcpServers` block to `.cursor/mcp.json`.
-- [VS Code (Copilot Agent)](https://htmly.shloksheth.tech/#install): add to `.vscode/mcp.json` under `servers` with `type: "sse"` and the URL.
-- [Any MCP client](https://htmly.shloksheth.tech/#install): point the SSE transport at `https://html.shloksheth.tech/sse`.
+- [VS Code (Copilot Agent)](https://htmly.shloksheth.tech/#install): add to `.vscode/mcp.json` under `servers` with `type: "http"` and the URL.
+- [Any MCP client](https://htmly.shloksheth.tech/#install): point remote MCP transport at `https://html.shloksheth.tech/mcp`, or use `https://html.shloksheth.tech/sse` for legacy SSE-only clients.
 
 ## Links
 
