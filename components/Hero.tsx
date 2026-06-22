@@ -20,7 +20,7 @@ function WordsPullUp({
   return (
     <span className={className}>
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden align-bottom">
+        <span key={i} className="inline-block overflow-hidden align-bottom pb-2 -mb-2">
           <motion.span
             className="inline-block"
             initial={{ y: "100%", opacity: 0 }}
@@ -57,27 +57,52 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs text-cream/80 backdrop-blur-sm transition hover:border-cream/40 hover:text-cream"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-brand-2" />
-            An MCP server for AI agents
+            Give your AI agent a canvas
           </motion.a>
 
           <h1 className="mt-8 max-w-4xl text-balance text-[2.6rem] font-bold leading-[0.98] tracking-tight text-cream sm:text-6xl md:text-7xl">
-            <WordsPullUp text="Stop reading plain markdown." />
+            <WordsPullUp text="AI that explains itself beautifully." />
             <br />
             <span className="font-serif text-[1.15em] font-normal italic tracking-tight text-brand-2">
-              <WordsPullUp text="See it rendered." delayOffset={0.32} />
+              <WordsPullUp text="Hosted live. Nothing on your machine." delayOffset={0.32} />
             </span>
           </h1>
+
+          {/* Example prompt pills */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.55, ease: EASE }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-2"
+          >
+            {["What changed in this PR?", "Walk me through the codebase", "Explain this diff visually"].map(
+              (prompt) => (
+                <span
+                  key={prompt}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-sm text-cream/80 backdrop-blur-sm"
+                >
+                  <span className="text-brand-2">→</span>
+                  {prompt}
+                </span>
+              )
+            )}
+          </motion.div>
 
           <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
-            className="mt-7 max-w-xl text-pretty text-base leading-relaxed text-cream/70 md:text-lg"
+            transition={{ duration: 0.8, delay: 0.7, ease: EASE }}
+            className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-cream/60 md:text-lg"
           >
-            Instead of answering with a wall of markdown text, your AI builds the
-            real page — HTML, CSS, JS — and Htmly deploys it instantly. One tool
-            call gives you a live link you can actually open and look at.
+            Your agent answers with a{" "}
+            <span className="text-cream/90">live, hosted page</span> — not a
+            local file, not a wall of text.{" "}
+            <span className="text-brand-2">
+              Diffs, diagrams, plans, dashboards
+            </span>{" "}
+            you can actually open, share, and revisit.
           </motion.p>
+
 
           <motion.div
             initial={{ y: 20, opacity: 0 }}

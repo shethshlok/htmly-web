@@ -82,11 +82,10 @@ export default function Home() {
           In simple words
         </h2>
         <p className="mt-5 text-2xl font-medium leading-snug tracking-tight md:text-3xl">
-          Normally your AI replies with a block of markdown you have to read and
-          imagine. Htmly turns that answer into a{" "}
-          <span className="text-brand-2">real, rendered web page</span> and deploys
-          it in an instant — so you can <em className="not-italic text-muted">see</em>{" "}
-          what it built, in a far more visual way, not just read about it.
+          Your AI agent doesn&apos;t just describe changes — it{" "}
+          <span className="text-brand-2">builds a hosted page</span> you can
+          open in your browser. No local files, no clutter — just a live link
+          with everything laid out visually.
         </p>
       </section>
 
@@ -144,6 +143,15 @@ export default function Home() {
             Same one-line endpoint, five different clients. Pick yours, copy the
             config, and you&apos;re connected.
           </p>
+          <div className="mx-auto mt-6 max-w-xl rounded-xl border border-brand/20 bg-brand/[0.04] px-5 py-4">
+            <p className="text-sm text-muted">
+              <span className="font-medium text-ink">Or just tell your agent:</span>
+            </p>
+            <p className="mt-1.5 font-mono text-sm leading-relaxed text-brand-2">
+              &ldquo;Add <span className="text-ink">{MCP_URL}</span>{" "}
+              as an MCP server&rdquo;
+            </p>
+          </div>
         </div>
         <div className="mt-12">
           <InstallTabs />
